@@ -18,7 +18,7 @@ DATABASES = {
             # I swear I will change that :)
             'PASSWORD':'password123',
             'HOST':'localhost',
-            'PORT':''
+            'PORT':'5432'
             }
         }
 
@@ -40,23 +40,3 @@ if DEBUG:
     STATIC_URL = '/static/'
     MEDIA_URL = STATIC_URL + 'media/'
 
-    INSTALLED_APPS += (
-        'debug_toolbar.apps.DebugToolbarConfig',
-    )
-
-    MIDDLEWARE_CLASSES += (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
-
-    # django-debug-toolbar specific
-    DEBUG_TOOLBAR_PANELS = (
-        'debug_toolbar.panels.version.VersionDebugPanel',
-        'debug_toolbar.panels.timer.TimerDebugPanel',
-        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-        'debug_toolbar.panels.headers.HeaderDebugPanel',
-        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-        'debug_toolbar.panels.template.TemplateDebugPanel',
-        'debug_toolbar.panels.sql.SQLDebugPanel',
-        'debug_toolbar.panels.signals.SignalDebugPanel',
-        'debug_toolbar.panels.logger.LoggingPanel',
-    )

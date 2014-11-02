@@ -50,7 +50,7 @@ DATABASES = {
         'USER': 'cameronp',
         'PASSWORD': 'password123',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -90,20 +90,6 @@ TEMPLATE_LOADERS = (
     #'django.template.loaders.eggs.Loader',
 )
 
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -111,7 +97,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -165,12 +151,11 @@ CORE_APPS = (
 
 EXTERNAL_APPS = (
     'django_extensions',
-    'south',
     'bootstrap3',
     # If you're using Django 1.7.x or later
     #'debug_toolbar.apps.DebugToolbarConfig',
     # If you're using Django 1.6.x or earlier
-    'debug_toolbar.apps.DebugToolbarConfig',
+    #'debug_toolbar.apps.DebugToolbarConfig',
 )
 
 LOCAL_APPS = (
