@@ -7,4 +7,8 @@ include
 # Mac OS X custom attribute files
 .DS_Store
 
-.Idea
+#compiled python
+*.pyc
+
+#pycharm files
+.idea
