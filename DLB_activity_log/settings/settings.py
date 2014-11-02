@@ -1,5 +1,7 @@
 import sys
+
 import os
+
 
 
 
@@ -54,6 +56,21 @@ SECRET_KEY = "ypnoz^web)wfs_+d7ghv0s54_44zilyof9+n=mf-2t%v2e6=+m"
 ADMINS = (
     ('Cameron Poole', 'Cameron.Poole@health.wa.gov.au'),
 )
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]
 
 MANAGERS = ADMINS
 
@@ -121,7 +138,7 @@ CORE_APPS = (
 EXTERNAL_APPS = ('django_extensions',
                 'south',
                 'bootstrap3',
-                'debug_toolbar',
+                'debug_toolbar.apps.DebugToolbarConfig',
 )
 
 LOCAL_APPS = (

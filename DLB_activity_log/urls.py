@@ -3,7 +3,8 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.views import serve
 from django.contrib import admin
-from projectname.home.views import HomeView
+from DLB_activity_log.home.views import HomeView
+
 
 admin.autodiscover()
 
@@ -20,3 +21,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
 )
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

@@ -41,7 +41,7 @@ if DEBUG:
     MEDIA_URL = STATIC_URL + 'media/'
 
     INSTALLED_APPS += (
-        'debug_toolbar',
+        'debug_toolbar.apps.DebugToolbarConfig',
     )
 
     MIDDLEWARE_CLASSES += (
