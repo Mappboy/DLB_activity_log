@@ -1,4 +1,4 @@
-
+{% extends 'base.html' %}
 
         {# Load the tag library #}
         {% load bootstrap3 %}
@@ -9,57 +9,19 @@
 
         {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
+{% block title %}
+    Create New Dataset
+{% endblock %}
 
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">DLB Activity Log</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#contact">Data Contacts</a></li>
-            <li><a href="#reminder">Reminders</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Log<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">Datasets</li>
-                    <li><a href="/create_dataset/">Create new dataset</a></li>
-                    <li><a href="/edit_dataset">Edit Datasets</a></li>
-                <li><a href="#">Search Datasets</a></li>
-                <li><a href="#">New Batch</a></li>
-                <li><a href="#">Update Batch</a></li>
-                <li class="divider"></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
+{% block content %}
+        <form  method="post" class="form">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons %}
+            <button type="submit" class="btn btn-primary">
+              {% bootstrap_icon "star" %} Submit
+            </button>
+          {% endbuttons %}
+        </form>
     </div>
-
-{# Display a form #}
-<form action="/save_dataset/" method="post" class="form">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">
-      {% bootstrap_icon "star" %} Submit
-    </button>
-  {% endbuttons %}
-</form>
-</body>
+{% endblock %}

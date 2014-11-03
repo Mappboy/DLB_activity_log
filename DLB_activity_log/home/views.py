@@ -40,7 +40,7 @@ class CreateDataset(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/success/')
+            return HttpResponseRedirect('/save_dataset/')
 
         return render(request, self.template_name, {'form': form})
 

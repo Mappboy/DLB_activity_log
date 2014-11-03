@@ -17,7 +17,7 @@ class Person(models.Model):
     name = models.CharField(max_length=30)
 
 class Linker(Person):
-    email = models.CharField(max_length=30)
+    email = models.EmailField()
 
 class Client(Person):
     phone = models.CharField(max_length=14)
