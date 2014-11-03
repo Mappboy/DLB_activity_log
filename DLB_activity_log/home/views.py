@@ -1,7 +1,10 @@
 #! /usr/bin/env python2.7
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.http import HttpResponse
+from django.shortcuts import render
+
 from models import Dataset
+from .forms import CreateDataset
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -17,6 +20,26 @@ def create_dataset(request):
     Create a new dataset view
     """
     return render_to_response('create_dataset.html')
+
+class CreateDataset(View):
+    """
+    Experimenting with view classes
+    """
+    form_class = CreateDatabase
+    initial = {'key': 'value'}
+    template_name = 'create_dataset.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/success/')
+
+        return render(request, self.template_name, {'form': form})
 
 #not sure whether to use name or id
 def edit_dataset(request,datasetname):
