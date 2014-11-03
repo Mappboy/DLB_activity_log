@@ -1,2 +1,0 @@
-class Reminder():
-    pass

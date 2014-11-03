@@ -8,9 +8,9 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from DLB_activity_log.home.models import *
 
-class AnimalTestCase(TestCase):
+class DatasetTestCase(TestCase):
     def setUp(self):
-        #Animal.objects.create(name="lion", sound="roar")
+        Dataset.objects.create(name="morb", )
         pass
 
     def test_animals_can_speak(self):
@@ -18,3 +18,9 @@ class AnimalTestCase(TestCase):
         #lion = Animal.objects.get(name="lion")
         #self.assertEqual(lion.speak(), 'The lion says "roar"')
         self.assertEqual(1,1,"Tests working correctly")
+
+class PersonTestCase(TestCase):
+    pass
+
+class UpdateTestCase(TestCase):
+    pass

@@ -1,22 +1,37 @@
+__author__ = 'Cameron Poole'
 # Author:Cameron Poole
 # Date  : 31/10/14
 # Data models for dlb data logger so far
 # Hopefully get something implemented reasonable quickly
-# TODO: CREATE DLU_ID class
+
+from datetime import date
 
 from django.db import models
-from people import Client,Linker
 
 
-class Update():
+class Update(models.Model):
+    date = models.DateField(default=date.today())
+    reason = models.CharField(max_length=100, default='Recurring')
+
+class Person(models.Model):
+    name = models.CharField(max_length=30)
+
+class Linker(Person):
+    email = models.CharField(max_length=30)
+
+class Client(Person):
+    phone = models.CharField(max_length=14)
+    def __str__(self):
+        return self.name
+
+class Reminder():
     pass
-
 
 class DLUId(models.Model):
     '''
     Information about a particular dlu id
     '''
-    projectid = models.CharField()
+    projectid = models.CharField(default='999999.99', max_length=10)
 
 
 class Dataset(models.Model):
@@ -29,48 +44,51 @@ class Dataset(models.Model):
             ('A','Adhoc'),
             ('O','Other'))
     name = models.CharField(max_length=50)
-    restricted = models.BooleanField()
-    categories = models.CharField(max_length=1,choices=TYPE)
-    contact = models.ManyToManyField(Client)
-    nextupdate = models.ManyToOne(Update)
-    dlbprojectid = models.ManyToOne(DLUId)
+    restricted = models.BooleanField(default=False)
+    categories = models.CharField(max_length=20, choices=TYPE)
+    contact = models.ForeignKey(Client)
+    nextupdate = models.ForeignKey(Update)
+    dlbprojectid = models.ForeignKey(DLUId)
+    def __str__(self):
+        return "Dataset {}".format(self.name)
 
 class Batch(models.Model):
     '''
     Stores information for a new batch for each data set
     '''
-    FORMATS = ('del',
-                'csv',
-                'fixed',
-                'other')
+    FORMATS = (('d','del'),
+               ('c','csv'),
+               ('f','fixed'),
+               ('o','other'))
     #I included update although maybe I shouldn't
-    TYPE = ('New',
-            'Correction',
-            'Refresh',
-            'Update')
-    datasetid = models.ForeignKey('Dataset')
+    TYPE = (('n','New'),
+            ('c','Correction'),
+            ('r','Refresh'),
+            ('o','Other'))
+    datasetid = models.ForeignKey(Dataset)
     data_recieved = models.DateField()
+    batch_type = models.CharField(max_length=6, choices=TYPE)
     #capture date start and end
     data_coverage_start = models.DateField()
     data_coverage_end = models.DateField()
-    data_format = models.CharField(max_length=5,choice=FORMATS)
-    format_changed = models.BooleanField()
+    data_format = models.CharField(max_length=12, choices=FORMATS)
+    format_changed = models.BooleanField(default=False)
     #Store hard or soft media
-    media = models.Charfield()
+    media = models.CharField(max_length=20)
     person_from = models.ManyToManyField(Client)
     person_recieved = models.ManyToManyField(Linker)
     #Path on linkage side usually /raw_data/
-    filepath = models.CharField()
+    filepath = models.FilePathField()
     #Only necessary for adhoc
     date_to_destroy = models.DateField()
     # for now check if load profile is needed in future email dev create trac ticket
-    new_profile = models.BooleanField()
+    new_profile = models.BooleanField(default=False)
     # Related trac ticket number
     trac_ticket = models.IntegerField()
     # Record number of records in and loaded
     recordsin = models.IntegerField()
     recordsloaded = models.IntegerField()
-    
+
     def createdestructiondate(self):
         "Create a destroy date we can use some info to autogenerate this "
         #import datetime
@@ -91,10 +109,12 @@ class Stage(models.Model):
             'LI','Linkage')
     batchid = models.ForeignKey('Batch')
     startdate = models.DateField()
-    starttime = models.TimeField() #Optional ?? 
+    starttime = models.TimeField() #Optional ??
     enddate = models.DateField()
     endtime = models.TimeField() #Optional ??'
-    controller = models.OneToOne(Linker)
+    controller = models.OneToOneField(Linker)
+
+
 class HardMedia(models.Model):
     '''
     Capture if it came in on a flash drive , or disk
@@ -104,7 +124,7 @@ class HardMedia(models.Model):
 
 class SoftMedia(models.Model):
     '''
-    Want to capture if it came through myft, suffex,email etc 
+    Want to capture if it came through myft, suffex,email etc
     '''
     pass
 
