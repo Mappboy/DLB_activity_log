@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from models import Dataset
-from .forms import CreateDataset
+from .forms import CreateDatasetForm
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -25,7 +25,7 @@ class CreateDataset(View):
     """
     Experimenting with view classes
     """
-    form_class = CreateDatabase
+    form_class = CreateDatasetForm
     initial = {'key': 'value'}
     template_name = 'create_dataset.html'
 
@@ -57,6 +57,9 @@ def display_dataset(request,datasetname):
     Return a complete overview for each dataset
     """
     return render_to_response('dataset_overview.html')
+
+def testview(request):
+    return HttpResponse("<h1>Hello Views</h1>")
     
 sample_queries = '''
 Which linkers have currently open formats or things 
