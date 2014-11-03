@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-#from DLB_activity_log import home
+from DLB_activity_log.home.models import *
 
 class AnimalTestCase(TestCase):
     def setUp(self):
