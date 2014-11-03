@@ -1,14 +1,20 @@
 #Forms stuff goes in here
 from django import forms
+from models import *
 
-class CreateDatasetForm(forms.Form):
+class CreateDatasetForm(forms.ModelForm):
   """
   Form for creating a new dataset
   """
-  pass
+  class Meta:
+    model = Dataset
+    fields = ['name']
+    
 
 class EditDatasetForm(forms.Form):
   """
   Form for editing a new dataset
   """
-  pass
+  class Meta:
+    model = Dataset
+    fields = ['name']
