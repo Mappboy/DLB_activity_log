@@ -1,10 +1,11 @@
 #! /usr/bin/env python2.7
 from django.views.generic import TemplateView, View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from models import Dataset
 from .forms import CreateDatasetForm
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -15,11 +16,13 @@ class HomeView(TemplateView):
         }
         return self.render_to_response(context)
 
+
 def create_dataset(request):
     """
     Create a new dataset view
     """
     return render_to_response('create_dataset.html')
+
 
 class CreateDataset(View):
     """
@@ -27,7 +30,7 @@ class CreateDataset(View):
     """
     form_class = CreateDatasetForm
     initial = {'key': 'value'}
-    template_name = 'create_dataset.html'
+    template_name = 'form.html'
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
@@ -36,27 +39,42 @@ class CreateDataset(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            # <process form cleaned data>
+            form.save()
             return HttpResponseRedirect('/success/')
 
         return render(request, self.template_name, {'form': form})
 
+
+def save_dataset(request, dataset):
+    """
+    Save a dataset
+    :param request:
+    :param dataset:
+    :return:
+    """
+    return HttpResponse('<h1>' + "YAY, you saved %s " % dataset + '</h1>')
+
+
 #not sure whether to use name or id
-def edit_dataset(request,datasetname):
+def edit_dataset(request, datasetname):
     """
     Edit existing dataset
+    :param request:
+    :param datasetname:
     """
     try:
         ds_to_edit = Dataset.objects.get(name=datasetname)
     except Dataset.DoesNotExist:
         raise Http404
     return render_to_response('edit_dataset.html')
-    
+
+
 def display_dataset(request,datasetname):
     """
     Return a complete overview for each dataset
     """
     return render_to_response('dataset_overview.html')
+
 
 def testview(request):
     return HttpResponse("<h1>Hello Views</h1>")

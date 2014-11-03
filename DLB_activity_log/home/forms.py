@@ -8,7 +8,12 @@ class CreateDatasetForm(forms.ModelForm):
   """
   class Meta:
     model = Dataset
-    fields = ['name']
+    fields = ['name',
+              'restricted',
+              'categories',
+              'contact',
+              'nextupdate',
+              'dlbprojectid']
     
 
 class EditDatasetForm(forms.Form):
@@ -17,4 +22,9 @@ class EditDatasetForm(forms.Form):
   """
   class Meta:
     model = Dataset
-    fields = ['name']
+    fields = ['name',
+              'restricted',
+              'categories',
+              'contact',
+              'nextupdate',
+              'dlbprojectid']
