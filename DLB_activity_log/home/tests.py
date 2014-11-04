@@ -34,9 +34,18 @@ class TestdatasetForm(TestCase):
               'nextupdate':Update(),
               'dlbprojectid':DLUId()}
     def test_form_valid(self):
+        """Testing form for dataset is working correctly"""
         test_dataset_form = CreateDatasetForm(testset)
-        self.assertTrue(test_dataset_form.is_valid()
-
+        self.assertTrue(test_dataset_form.is_valid())
+        
+    def test_form_isinvalid(self):
+        """Testing form is failing correctly"""
+        testset['nextupdate'] = None
+        test_dataset_form = CreateDatasetForm(testset)
+        self.assertFalse(test_dataset_form.is_valid())
+        errors = test_dataset_form.errors.as_data()
+        # TODO: check is InValidField  
+        
 class PersonTestCase(TestCase):
     pass
 
