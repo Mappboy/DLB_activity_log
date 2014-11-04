@@ -1,10 +1,10 @@
 #! /usr/bin/env python2.7
-from django.views.generic import TemplateView, View
-from django.http import HttpResponse, HttpResponseRedirect
+import django.http
 from django.shortcuts import render
 
 from models import Dataset
-from .forms import CreateDatasetForm
+from .forms import CreateDatasetForm, create_new_datasets
+from django.views.generic import *
 
 
 class HomeView(TemplateView):
@@ -17,12 +17,21 @@ class HomeView(TemplateView):
         return self.render_to_response(context)
 
 
-def create_dataset(request):
-    """
-    Create a new dataset view
-    """
-    return render_to_response('create_dataset.html')
 
+
+class Combinedform(FormView):
+    template_name = 'form-inline.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'form': create_new_datasets()})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return django.http.HttpResponseRedirect('/save_dataset/', form)
+
+        return render(request, self.template_name, {'form': form})
 
 class CreateDataset(View):
     """
@@ -40,7 +49,7 @@ class CreateDataset(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/save_dataset/')
+            return django.http.HttpResponseRedirect('/save_dataset/', form)
 
         return render(request, self.template_name, {'form': form})
 
@@ -52,7 +61,7 @@ def save_dataset(request, dataset):
     :param dataset:
     :return:
     """
-    return HttpResponse('<h1>' + "YAY, you saved %s " % dataset + '</h1>')
+    return django.http.HttpResponse('<h1>' + "YAY, you saved %s " % dataset.clean_fields()['name'] + '</h1>')
 
 
 #not sure whether to use name or id
@@ -77,7 +86,7 @@ def display_dataset(request,datasetname):
 
 
 def testview(request):
-    return HttpResponse("<h1>Hello Views</h1>")
+    return django.http.HttpResponse("<h1>Hello Views</h1>")
     
 sample_queries = '''
 Which linkers have currently open formats or things 

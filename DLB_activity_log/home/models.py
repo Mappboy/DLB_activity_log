@@ -7,7 +7,7 @@ __author__ = 'Cameron Poole'
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-#  This program is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
@@ -15,27 +15,29 @@ __author__ = 'Cameron Poole'
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import date
+
 from django.db import models
 
 
-class Update(models.Model):
-    dataset = models.ForeignKey(Dataset)
-    date = models.DateField(default=date.today())
-    reason = models.CharField(max_length=100, default='Recurring')
-
 class Person(models.Model):
     name = models.CharField(max_length=30)
+    email = models.EmailField(default="cameron.j.poole@health.wa.gov.au")
+
 
 class Linker(Person):
-    email = models.EmailField()
+    linkername = models.CharField(max_length=15,default="cameronp")
+
 
 class Client(Person):
     phone = models.CharField(max_length=14)
+
     def __str__(self):
         return self.name
 
+
 class Reminder():
     pass
+
 
 class DLUId(models.Model):
     '''
@@ -48,40 +50,52 @@ class Dataset(models.Model):
     """
     Stores data about each dataset
     """
-    TYPE = (('CI','Core Infrastructure'),
-            ('NI','Non-Core Infrastructure'),
-            ('RN','Recurring'),
-            ('A','Adhoc'),
-            ('O','Other'))
+    TYPE = (('CI', 'Core Infrastructure'),
+            ('NI', 'Non-Core Infrastructure'),
+            ('RN', 'Recurring'),
+            ('A', 'Adhoc'),
+            ('O', 'Other'))
     UPDATES = (('W', 'Weekly'),
-                ('M','Monthly'),
-                ('Q','Quarterly'),
-                ('B','Bi-Annual'),
-                ('Y','Yearly'),
-                ('O','One off'))
+               ('M', 'Monthly'),
+               ('Q', 'Quarterly'),
+               ('B', 'Bi-Annual'),
+               ('Y', 'Yearly'),
+               ('O', 'One off'),
+               ('U', 'Unknown'))
     name = models.CharField(max_length=50)
     restricted = models.BooleanField(default=False)
     categories = models.CharField(max_length=20, choices=TYPE)
     contact = models.ForeignKey(Client)
-    updatecycle = models.CharField(max_length=12, choices=UPDATES)
+    updatecycle = models.CharField(max_length=12, choices=UPDATES, default='Unknown')
     dlbprojectid = models.ForeignKey(DLUId)
-    overview = models.TextField()
+    overview = models.TextField(default="This is a dataset overview")
+
     def __str__(self):
         return "Dataset {}".format(self.name)
 
+
+class Update(models.Model):
+    """
+    Stores infromation relating to updates
+    """
+    dataset = models.ForeignKey(Dataset, default=5)
+    date = models.DateField(default=date.today())
+    reason = models.CharField(max_length=100, default='Recurring')
+
+
 class Batch(models.Model):
-    '''
+    """
     Stores information for a new batch for each data set
-    '''
-    FORMATS = (('d','del'),
-               ('c','csv'),
-               ('f','fixed'),
-               ('o','other'))
+    """
+    FORMATS = (('d', 'del'),
+               ('c', 'csv'),
+               ('f', 'fixed'),
+               ('o', 'other'))
     #I included update although maybe I shouldn't
-    TYPE = (('n','New'),
-            ('c','Correction'),
-            ('r','Refresh'),
-            ('o','Other'))
+    TYPE = (('n', 'New'),
+            ('c', 'Correction'),
+            ('r', 'Refresh'),
+            ('o', 'Other'))
     datasetid = models.ForeignKey(Dataset)
     data_recieved = models.DateField()
     batch_type = models.CharField(max_length=6, choices=TYPE)
@@ -120,15 +134,15 @@ class Stage(models.Model):
     '''
     Stores information for each stage of a batch
     '''
-    STAGE = ('EV','Evaluating',
-            'CL', 'Cleaning',
-            'EX','Exporting',
-            'LI','Linkage')
+    STAGE = (('EV', 'Evaluating'),
+             ('CL', 'Cleaning'),
+             ('EX', 'Exporting'),
+             ('LI', 'Linkage'))
     batchid = models.ForeignKey('Batch')
     startdate = models.DateField()
-    starttime = models.TimeField() #Optional ??
+    starttime = models.TimeField()
     enddate = models.DateField()
-    endtime = models.TimeField() #Optional ??'
+    endtime = models.TimeField()
     controller = models.OneToOneField(Linker)
 
 
@@ -139,11 +153,13 @@ class HardMedia(models.Model):
     #location where it is stored
     pass
 
+
 class SoftMedia(models.Model):
     '''
     Want to capture if it came through myft, suffex,email etc
     '''
     pass
+
 
 class Destruction(models.Model):
     '''

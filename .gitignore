@@ -12,3 +12,7 @@ include
 
 #pycharm files
 .idea
+
+#coverage stuff
+htmlcov
+.coverage
