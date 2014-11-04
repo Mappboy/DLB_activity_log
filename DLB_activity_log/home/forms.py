@@ -6,14 +6,25 @@ from django.forms.models import inlineformset_factory
 # TODO: Create forms for most of our models
 
 def create_new_datasets():
-  retrun inlineformset_factory(CreateDatasetForm,CreateContact)
+  return inlineformset_factory(CreateDatasetForm,CreateContact)
 
+class CreateDLUID(forms.ModelForm):
+  """
+  Project id in forms maybe if not in list create new
+  """
+  class Meta:
+  model = DLUId
+  fields = ['projectid']
+  
+  
 class CreateContact(forms.ModelForm):
   """
   Form for adding a new contact
   """
+  class Meta:
   model = Client
   fields = ['name','email']
+  
   
 class CreateDatasetForm(forms.ModelForm):
   """
