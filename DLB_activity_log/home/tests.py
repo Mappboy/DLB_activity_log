@@ -16,8 +16,9 @@ class DatasetTestCase(TestCase):
               'restricted':False,
               'categories':'CI',
               'contact':Client(name='Joe Blogs',email='Joe.Blogs@health.wa.gov.au'),
-              'nextupdate':Update(),
-              'dlbprojectid':DLUId()}
+              'updatecylce':'M',
+              'dlbprojectid':DLUId(),
+              'overview':"This dataset bleongs to the morbidity HMDS blah blah blah"}
         Dataset.objects.create(testset)
 
     def test_dataset_name(self):
@@ -31,8 +32,9 @@ class TestdatasetForm(TestCase):
               'restricted':False,
               'categories':'CI',
               'contact':Client(name='Joe Blogs',email='Joe.Blogs@health.wa.gov.au'),
-              'nextupdate':Update(),
-              'dlbprojectid':DLUId()}
+              'updatecycle':'M',
+              'dlbprojectid':DLUId(),
+              'overview':"This dataset bleongs to the morbidity HMDS blah blah blah"}
     def test_form_valid(self):
         """Testing form for dataset is working correctly"""
         test_dataset_form = CreateDatasetForm(testset)
