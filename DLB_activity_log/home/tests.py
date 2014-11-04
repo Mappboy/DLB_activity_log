@@ -7,18 +7,35 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from DLB_activity_log.home.models import *
+from DLB_activity_log.home.forms import *
 
 # TODO: Create test cases for models
 class DatasetTestCase(TestCase):
     def setUp(self):
-        Dataset.objects.create(name="morb", )
-        pass
+        testset = {'name':'morb',
+              'restricted':False,
+              'categories':'CI',
+              'contact':Client(name='Joe Blogs',email='Joe.Blogs@health.wa.gov.au'),
+              'nextupdate':Update(),
+              'dlbprojectid':DLUId()}
+        Dataset.objects.create(testset)
 
-    def test_animals_can_speak(self):
-        """Animals that can speak are correctly identified"""
-        #lion = Animal.objects.get(name="lion")
-        #self.assertEqual(lion.speak(), 'The lion says "roar"')
-        self.assertEqual(1,1,"Tests working correctly")
+    def test_dataset_name(self):
+        """Testing name is recorded correctly"""
+        morb = Dataset.objects.get(name='morb')
+        self.assertEqual(morb.name,'morb',"Dataset records name")
+
+class TestdatasetForm(TestCase):
+    def setUp(self):
+        testset = {'name':'morb',
+              'restricted':False,
+              'categories':'CI',
+              'contact':Client(name='Joe Blogs',email='Joe.Blogs@health.wa.gov.au'),
+              'nextupdate':Update(),
+              'dlbprojectid':DLUId()}
+    def test_form_valid(self):
+        test_dataset_form = CreateDatasetForm(testset)
+        self.assertTrue(test_dataset_form.is_valid()
 
 class PersonTestCase(TestCase):
     pass
