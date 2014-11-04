@@ -19,6 +19,7 @@ from django.db import models
 
 
 class Update(models.Model):
+    dataset = models.ForeignKey(Dataset)
     date = models.DateField(default=date.today())
     reason = models.CharField(max_length=100, default='Recurring')
 
@@ -52,12 +53,19 @@ class Dataset(models.Model):
             ('RN','Recurring'),
             ('A','Adhoc'),
             ('O','Other'))
+    UPDATES = (('W', 'Weekly'),
+                ('M','Monthly'),
+                ('Q','Quarterly'),
+                ('B','Bi-Annual'),
+                ('Y','Yearly'),
+                ('O','One off'))
     name = models.CharField(max_length=50)
     restricted = models.BooleanField(default=False)
     categories = models.CharField(max_length=20, choices=TYPE)
     contact = models.ForeignKey(Client)
-    nextupdate = models.ForeignKey(Update)
+    updatecycle = models.CharField(max_length=12, choices=UPDATES)
     dlbprojectid = models.ForeignKey(DLUId)
+    overview = models.TextField()
     def __str__(self):
         return "Dataset {}".format(self.name)
 
