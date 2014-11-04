@@ -6,7 +6,7 @@ from django.forms.models import inlineformset_factory
 # TODO: Create forms for most of our models
 
 def create_new_datasets():
-  return inlineformset_factory(CreateDatasetForm,CreateContact)
+  return inlineformset_factory(CreateDatasetForm,CreateContact,CreateDLUID)
 
 class CreateDLUID(forms.ModelForm):
   """
