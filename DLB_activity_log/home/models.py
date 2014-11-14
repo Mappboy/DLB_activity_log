@@ -15,7 +15,7 @@ __author__ = 'Cameron Poole'
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import date
-
+from django.contrib.auth.models import User
 from django.db import models
 
 
