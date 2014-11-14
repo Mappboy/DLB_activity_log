@@ -1,7 +1,7 @@
 #! /usr/bin/env python2.7
 import django.http
 from django.shortcuts import render
-
+ CreateView, UpdateView, DeleteView
 from models import Dataset
 from .forms import CreateDatasetForm, create_new_datasets
 from django.views.generic import *
@@ -65,18 +65,13 @@ def save_dataset(request, dataset):
 
 
 #not sure whether to use name or id
-def edit_dataset(request, datasetname):
-    """
-    Edit existing dataset
-    :param request:
-    :param datasetname:
-    """
-    try:
-        ds_to_edit = Dataset.objects.get(name=datasetname)
-    except Dataset.DoesNotExist:
-        raise Http404
-    return render_to_response('edit_dataset.html')
-
+class UpdateDataset(CreateView):
+    model = Dataset
+    fields = []
+    
+class DeleteDataset(DeleteView):
+    model = Dataset
+    success_url = reverse_url('Dataset_list')
 
 def display_dataset(request,datasetname):
     """
