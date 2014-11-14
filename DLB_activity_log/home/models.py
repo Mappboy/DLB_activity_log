@@ -24,7 +24,7 @@ class Person(models.Model):
     email = models.EmailField(default="cameron.j.poole@health.wa.gov.au")
 
 
-class Linker(Person):
+class Linker(User):
     linkername = models.CharField(max_length=15,default="cameronp")
 
 
@@ -69,6 +69,7 @@ class Dataset(models.Model):
     updatecycle = models.CharField(max_length=12, choices=UPDATES, default='Unknown')
     dlbprojectid = models.ForeignKey(DLUId)
     overview = models.TextField(default="This is a dataset overview")
+    created_by = models.ForeignKey(Linker)
 
     def __str__(self):
         return "Dataset {}".format(self.name)
@@ -81,6 +82,7 @@ class Update(models.Model):
     dataset = models.ForeignKey(Dataset, default=5)
     date = models.DateField(default=date.today())
     reason = models.CharField(max_length=100, default='Recurring')
+    update_by = models.ForeignKey(Linker)
 
 
 class Batch(models.Model):
@@ -119,6 +121,8 @@ class Batch(models.Model):
     # Record number of records in and loaded
     recordsin = models.IntegerField()
     recordsloaded = models.IntegerField()
+    created_by = models.ForeignKey(Linker)
+
 
     def createdestructiondate(self):
         "Create a destroy date we can use some info to autogenerate this "
