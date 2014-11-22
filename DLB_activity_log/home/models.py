@@ -15,6 +15,7 @@ __author__ = 'Cameron Poole'
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import date
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -24,14 +25,19 @@ class Person(models.Model):
     email = models.EmailField(default="cameron.j.poole@health.wa.gov.au")
 
 
+#This should actually inherit from USER but currently having issues
+#TODO: Make class inherit from USER
 class Linker(User):
-    linkername = models.CharField(max_length=15,default="cameronp")
+    linkername = models.CharField(max_length=15, default="cameronp")
 
 
 class Client(Person):
     phone = models.CharField(max_length=14)
 
     def __str__(self):
+        return self.name
+
+    def __unicode__(self):
         return self.name
 
 
@@ -66,8 +72,8 @@ class Dataset(models.Model):
     restricted = models.BooleanField(default=False)
     categories = models.CharField(max_length=20, choices=TYPE)
     contact = models.ForeignKey(Client)
-    updatecycle = models.CharField(max_length=12, choices=UPDATES, default='Unknown')
-    dlbprojectid = models.ForeignKey(DLUId)
+    update_cycle = models.CharField(max_length=12, choices=UPDATES, default='Unknown')
+    dlb_project_id = models.ForeignKey(DLUId)
     overview = models.TextField(default="This is a dataset overview")
     created_by = models.ForeignKey(Linker)
 
@@ -108,8 +114,7 @@ class Batch(models.Model):
     format_changed = models.BooleanField(default=False)
     #Store hard or soft media
     media = models.CharField(max_length=20)
-    person_from = models.ManyToManyField(Client)
-    person_recieved = models.ManyToManyField(Linker)
+    person_from = models.ForeignKey(Client)
     #Path on linkage side usually /raw_data/
     filepath = models.FilePathField()
     #Only necessary for adhoc
@@ -121,7 +126,7 @@ class Batch(models.Model):
     # Record number of records in and loaded
     recordsin = models.IntegerField()
     recordsloaded = models.IntegerField()
-    created_by = models.ForeignKey(Linker)
+    #created_by = models.ForeignKey(Linker)
 
 
     def createdestructiondate(self):

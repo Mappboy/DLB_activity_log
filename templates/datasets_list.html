@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% block title %}
+    Create New Dataset
+{% endblock %}
+
+{% block content %}
+    <h2>Datasets</h2>
+    <ul>
+        {% for dataset in object_list %}
+            <li>{{ dataset.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

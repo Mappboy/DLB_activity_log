@@ -1,12 +1,8 @@
 # Forms stuff goes in here
 from django import forms
 from models import *
-from django.forms.models import inlineformset_factory
 
 # TODO: Create forms for most of our models
-
-def create_new_datasets():
-    return inlineformset_factory(CreateDatasetForm, CreateContact, CreateDLUID)
 
 
 class CreateDLUID(forms.ModelForm):
@@ -39,21 +35,17 @@ class CreateDatasetForm(forms.ModelForm):
         fields = ['name',
                   'restricted',
                   'categories',
+                  'update_cycle',
                   'contact',
-                  'updatecycle',
-                  'dlbprojectid']
+                  'dlb_project_id',
+                  'created_by']
 
 
-class EditDatasetForm(forms.Form):
+class CreateBatch(forms.ModelForm):
     """
-  Form for editing a new dataset
-  """
+    Form for creating new data batch
+    """
 
     class Meta:
-        model = Dataset
-        fields = ['name',
-                  'restricted',
-                  'categories',
-                  'contact',
-                  'nextupdate',
-                  'dlbprojectid']
+        model = Batch
+        fields = []
