@@ -17,14 +17,40 @@ class HomeView(TemplateView):
 class DatasetList(ListView):
     model = Dataset
 
-class NewDataset(FormView):
+class NewDataset(CreateView):
     """
     Experimenting with view classes
     """
-    form_class = CreateDatasetForm
-    template_name = 'createdataset.html'
+    model = Dataset
+    template_name = 'form.html'
     success_url = '/success/'
 
+class SuccessView(TemplateView):
+    template_name = 'success.html'
+
+class NewClient(CreateView):
+    """
+    Experimenting with view classes
+    """
+    model = Client
+    template_name = 'form.html'
+    success_url = '/success/'
+
+class NewLinker(CreateView):
+    """
+    Experimenting with view classes
+    """
+    model = Linker
+    template_name = 'form.html'
+    success_url = '/success/'
+
+class NewDLUID(CreateView):
+    """
+    Experimenting with view classes
+    """
+    model = DLUId
+    template_name = 'form.html'
+    success_url = '/success/'
 
 class CreateDataset(CreateView):
     """
@@ -44,7 +70,7 @@ class CreateDataset(CreateView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         client_form = ContactFormSet()
-        dluid_form = IDFormSet()
+        dluid_form = IdFormset()
         return self.render_to_response(
             self.get_context_data(form=form,
                                   client_form=client_form,

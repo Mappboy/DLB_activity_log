@@ -14,9 +14,12 @@
 {% endblock %}
 
 {% block content %}
-        <form action="" method="post">
+    <div>
+        <form action="" class="form-inline" method="post">
           {% csrf_token %}
-          {% bootstrap_form form layout='inline'%}
+          {% bootstrap_form form layout='horizontal'%}
+          {%  bootstrap_formset client_form layout='horizontal' %}
+          {%  bootstrap_formset dluid_form layout='horizontal' %}
           {% buttons %}
             <button type="submit" class="btn btn-primary">
               {% bootstrap_icon "star" %} Submit
@@ -25,3 +28,5 @@
         </form>
     </div>
 {% endblock %}
+
+<script src="{{ STATIC_URL }}libs/django-dynamic-formset/src/jquery.formset.min.js"></script>
