@@ -117,6 +117,15 @@ def testview(request):
     return django.http.HttpResponse("<h1>Hello Views</h1>")
 
 
+class NewBatch(FormView):
+    """
+    Experimenting with view classes
+    """
+    form_class = CreateBatchForm
+    template_name = 'createbatch.html'
+    success_url = '/success/'
+
+
 sample_queries = '''
 Which linkers have currently open formats or things 
 

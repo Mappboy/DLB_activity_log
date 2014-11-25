@@ -126,7 +126,7 @@ class Batch(models.Model):
     # Record number of records in and loaded
     recordsin = models.IntegerField()
     recordsloaded = models.IntegerField()
-    #created_by = models.ForeignKey(Linker)
+    created_by = models.ForeignKey(Linker)
 
 
     def createdestructiondate(self):

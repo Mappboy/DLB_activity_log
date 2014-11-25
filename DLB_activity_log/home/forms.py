@@ -1,7 +1,7 @@
 # Forms stuff goes in here
-from django import forms
 from models import *
-
+#from django.forms.extras.widgets import SelectDateWidget
+from django.contrib.admin.widgets import *
 # TODO: Create forms for most of our models
 
 
@@ -32,20 +32,18 @@ class CreateDatasetForm(forms.ModelForm):
 
     class Meta:
         model = Dataset
-        fields = ['name',
-                  'restricted',
-                  'categories',
-                  'update_cycle',
-                  'contact',
-                  'dlb_project_id',
-                  'created_by']
+        fields = '__all__'
 
 
-class CreateBatch(forms.ModelForm):
+class CreateBatchForm(forms.ModelForm):
     """
     Form for creating new data batch
     """
 
     class Meta:
         model = Batch
-        fields = []
+        fields = "__all__"
+        labels = {'data_received': 'Date Received'}
+        widgets = {'data_received': AdminDateWidget()}
+        help_texts = {'data_received': 'Data batch received'}
+        error_messages = {}
