@@ -221,7 +221,7 @@ for row in myreader:
                     break
         new_dataset = True
 
-    if new_dataset and dataset != u'Midwives':
+   if new_dataset and dataset != u'Midwives':
         prim_key=0
         for prim_key,batch_zipped in enumerate(izip_longest(start_dates,
                                             end_dates,
@@ -232,10 +232,12 @@ for row in myreader:
                                             new_loaded,
                                             cor_records,
                                             cor_loaded)):
+            new_batch_fields = dict([ field for field in\
+                    izip_longest(batchfields,[idlookup['home.Dataset'][dataset],
+                    batch_type,data_format,media]+ list(batch_zipped))])
             init_data.append(json.loads(json.dumps({"pk":prim_key+batchprimkey,
                                     "model":"model.Batch",
-                "fields":zip(batchfields,[idlookup['home.Dataset'][dataset],
-                    batch_type,data_format,media]+ list(batch_zipped))},default=default
+                "fields":new_batch_fields},default=default
                 )))
         batchprimkey+=prim_key
 
@@ -251,9 +253,12 @@ for row in myreader:
                                             new_loaded,
                                             cor_records,
                                             cor_loaded)):
+            new_batch_fields = dict([ field for field in\
+                    izip_longest(midbatch,[idlookup['home.Dataset'][dataset],
+                    batch_type,data_format,media]+ list(batch_zipped))])
             init_data.append(json.loads(json.dumps({"pk":prim_key+batchprimkey,
                                     "model":"model.Batch",
-                "fields":zip(midbatch,[idlookup['home.Dataset'][dataset],
-                    batch_type,data_format,media]+ list(batch_zipped))},default=default
+                "fields":new_batch_fields},default=default
                 )))
         batchprimkey+=prim_key
+
