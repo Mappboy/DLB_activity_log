@@ -24,7 +24,7 @@
     "categories":"CI",
     "contact":"Ian Towart",#This should have foreign key pointer
     "update_cycle":'M',
-    "dlb_project_id":NULL,
+    "dlb_project_id":None,
     "overview":"Hospitatl Morbidity data  system, replace with really nice description",
     "created_by":"cameronp", #This needs foerign key 
     }
