@@ -1,17 +1,33 @@
 [
-{
-"model":"home.Dataset",
-"pk":1,
-"fields":{
-  "name":"Morbidity",
-  "restricted":False,
-  "categories":"CI",
-  "contact":"Ian Towart",#This should have foreign key pointer
-  "update_cycle":'M',
-  "dlb_project_id":NULL,
-  "overview":"Hospitatl Morbidity data  system, replace with really nice description",
-  "created_by":"cameronp", #This needs foerign key 
+  {"model":"home.Linker",
+  "pk":1,
+  "fields":{
+    "username":"cameronp",
+    "first_name":"Cameron",
+    "last_name":"Poole",
+    "linkername":"cameronp"
   }
-},
+  },
+  {"model":"home.Client",
+  "pk":1,
+  "fields":{
+    "name":"Ian Towart",
+    "email":"Ian.Towart@health.wa.gov.au",
+    "phone":"94354123"
+  }
+  },
+  {"model":"home.Dataset",
+  "pk":1,
+  "fields":{
+    "name":"Morbidity",
+    "restricted":False,
+    "categories":"CI",
+    "contact":"Ian Towart",#This should have foreign key pointer
+    "update_cycle":'M',
+    "dlb_project_id":NULL,
+    "overview":"Hospitatl Morbidity data  system, replace with really nice description",
+    "created_by":"cameronp", #This needs foerign key 
+    }
+  },
 ]
   
