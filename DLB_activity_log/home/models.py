@@ -104,6 +104,9 @@ class Batch(models.Model):
             ('c', 'Correction'),
             ('r', 'Refresh'),
             ('o', 'Other'))
+    STATUS = (('O','Open'),
+              ('C','Closed'),
+              ('U','Unassigned'))
     datasetid = models.ForeignKey(Dataset)
     data_recieved = models.DateField()
     batch_type = models.CharField(max_length=6, choices=TYPE)
@@ -127,6 +130,8 @@ class Batch(models.Model):
     recordsin = models.IntegerField()
     recordsloaded = models.IntegerField()
     created_by = models.ForeignKey(Linker)
+    #Want a status field whether batch is open or closed
+    status = models.CharField(max_length=12,choices=STATUS,default='U')
 
 
     def createdestructiondate(self):
@@ -146,7 +151,8 @@ class Stage(models.Model):
     STAGE = (('EV', 'Evaluating'),
              ('CL', 'Cleaning'),
              ('EX', 'Exporting'),
-             ('LI', 'Linkage'))
+             ('LI', 'Linkage'),
+             ('CO','Complete'))
     batchid = models.ForeignKey('Batch')
     startdate = models.DateField()
     starttime = models.TimeField()
