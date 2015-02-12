@@ -4,7 +4,7 @@
             "projectid": "209999.99"
         },
         "model": "home.DLUId",
-        "pk": "1"
+        "pk": 1
     },
     {
         "fields": {
@@ -14,7 +14,7 @@
             "username": "cameronp"
         },
         "model": "home.Linker",
-        "pk": "1"
+        "pk": 1
     },
     {
         "fields": {
@@ -23,13 +23,13 @@
             "phone": "94354123"
         },
         "model": "home.Client",
-        "pk": " 1"
+        "pk": 1
     },
     {
         "fields": {
             "categories": "CI",
             "contact": "Ian Towart",
-            "created_by": "1",
+            "created_by": 1,
             "dlb_project_id": "None",
             "name": "Morbidity",
             "overview": "Hospitatl Morbidity data  system, replace with really nice description",
@@ -37,20 +37,20 @@
             "update_cycle": "M"
         },
         "model": "home.Dataset",
-        "pk": " 1"
+        "pk": 1
     },
     {
         "fields": {
             "categories": "CI",
             "contact": "None",
-            "created_by": "1",
+            "created_by": 1,
             "dlb_project_id": "None",
             "name": "Births",
             "overview": "None",
             "update_cycle": "M"
         },
         "model": "home.Dataset",
-        "pk": " 2"
+        "pk": 2
     },
     {
         "fields": {
@@ -63,7 +63,7 @@
             "update_cycle": "M"
         },
         "model": "home.Dataset",
-        "pk": " 3"
+        "pk": 3
     },
     {
         "fields": {
@@ -76,7 +76,7 @@
             "update_cycle": "M"
         },
         "model": "home.Dataset",
-        "pk": " 4"
+        "pk": 4
     },
     {
         "fields": {
@@ -89,7 +89,7 @@
             "update_cycle": "M"
         },
         "model": "home.Dataset",
-        "pk": " 5"
+        "pk": 5
     },
     {
         "fields": {
@@ -102,7 +102,7 @@
             "update_cycle": "B"
         },
         "model": "home.Dataset",
-        "pk": " 6"
+        "pk": 6
     },
     {
         "fields": {
@@ -115,6 +115,6 @@
             "update_cycle": "M"
         },
         "model": "home.Dataset",
-        "pk": " 7"
+        "pk": 7
     }
 ]

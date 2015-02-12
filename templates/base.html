@@ -4,92 +4,118 @@
 {% load bootstrap3 %}
 
 <html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        {% block bootstrap3_title %}{% block title %}{% endblock %}{% endblock %}
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    {% block bootstrap3_title %}{% block title %}{% endblock %}{% endblock %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/3.1.1/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/font-awesome/4.0.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
 
-        <script src="{{ STATIC_URL }}libs/modernizr/2.6.2/modernizr-2.6.2.min.js"></script>
-    </head>
-    <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+    <script src="{{ STATIC_URL }}libs/modernizr/2.6.2/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">DLB Activity Log</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">DLB Activity Log</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/home/">Home</a></li>
-            <li><a href="#contact">Data Contacts</a></li>            
-            <li><a href="#reminder">Reminders</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Log<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">Datasets</li>
-                    <li><a href="/create_dataset/">Create new dataset</a></li>
-                    <li><a href="/edit_dataset/">Edit Datasets</a></li>
-                <li><a href="/search_dataset/">Search Datasets</a></li>
-                <li><a href="/create_batch/">New Batch</a></li>
-                <li><a href="/update_batch/">Update Batch</a></li>
-                <li><a href="/create_client/">New Contact</a></li>
-                <li><a href="/create_linker/">New Linker</a></li>
-                <li><a href="/create_dluid/">New Project ID</a></li>
-                <li class="divider"></li>
-              </ul>
-            </li>
-          </ul>
-          {% if form.errors %}
-            <p>Your username and password didn't match. Please try again.</p>
-           {% endif %}
-          <form action="{% url 'django.contrib.auth.views.login' %}" class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" value="login" placeholder="Email/Username" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home/">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">New work<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Batches</li>
+                        <li><a href="/create_batch/">New Batch</a></li>
+                        <li><a href="/update_batch/">Update Batch</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Log<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Datasets</li>
+                        <li><a href="/create_dataset/">Create new dataset</a></li>
+                        <li><a href="/edit_dataset/">Edit Datasets</a></li>
+                        <li><a href="/search_dataset/">Search Datasets</a></li>
+                        <li><a href="/create_linker/">New Linker</a></li>
+                        <li><a href="/create_dluid/">New Project ID</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Contacts<b class="caret"></b></a>
+
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Contacts</li>
+                        <li><a href="/create_client/">New Contact</a></li>
+                        <li><a href="/search_client/">Search Contact</a></li>
+                        <li><a href="/list_client/">List Contact</a></li>
+                    </ul>
+                </li>
+                <!--li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reminders<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Reminders</li>
+                        <li><a href="/add_reminder/">View Reminders</a></li>
+                        <li><a href="/new_reminder/">New Reminders</a></li>
+                        <li><a href="/calendar/">Calendar</a></li>
+                    </ul>
+                </li-->
+
+
+                </li>
+            </ul>
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <form action="{% url 'django.contrib.auth.views.login' %}" class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" value="login" placeholder="Email/Username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div>
+        <!--/.navbar-collapse -->
     </div>
+</div>
 
-    {% block content %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="Jumbotron">
+        Web page currently under construction
+    </div> </div>
+{% endblock %}
 
-    <footer>
-        <p>&copy; Data Linkage WA 2014</p>
-    </footer>
+<footer>
+    <p>&copy; Data Linkage WA 2015</p>
+</footer>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}libs/jquery/2.1.0/jquery-2.1.0.min.js"><\/script>')</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}libs/jquery/2.1.0/jquery-2.1.0.min.js"><\/script>')</script>
 
-    <script src="{{ STATIC_URL }}libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <script src="{{ STATIC_URL }}js/main.js"></script>
+<script src="{{ STATIC_URL }}js/main.js"></script>
 
-    <script>
-        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src='//www.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
-    </body>
+</body>
 </html>

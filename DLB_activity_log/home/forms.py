@@ -1,9 +1,9 @@
 # Forms stuff goes in here
 from models import *
-#from django.forms.extras.widgets import SelectDateWidget
-from django.forms.models import inlineformset_factory
+# from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.admin.widgets import *
 # TODO: Create forms for most of our models
+# Current problem with date fields being in American formats
 # Can we use modelChoice
 
 
@@ -24,7 +24,8 @@ class CreateContactForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ['name', 'email']
+        fields = '__all__'
+
 
 class CreateLinkerForm(forms.ModelForm):
     """
@@ -34,6 +35,7 @@ class CreateLinkerForm(forms.ModelForm):
     class Meta:
         model = Linker
         fields = '__all__'
+
 
 class CreateDatasetForm(forms.ModelForm):
     """
@@ -49,14 +51,15 @@ class CreateBatchForm(forms.ModelForm):
     """
     Form for creating new data batch
     """
+    model = Batch
+    fields = "__all__"
 
     class Meta:
-        model = Batch
-        fields = "__all__"
         labels = {'data_received': 'Date Received'}
-        widgets = {'data_received': AdminDateWidget()}
+        widgets = {'data_received': AdminDateWidget(), 'filepath': AdminTextInputWidget()}
         help_texts = {'data_received': 'Data batch received'}
         error_messages = {}
 
-IdFormset = inlineformset_factory(DLUId, Dataset)
-ContactFormSet = inlineformset_factory(Client, Dataset)
+
+#IdFormset = inlineformset_factory(DLUId, Dataset)
+#ContactFormSet = inlineformset_factory(Client, Dataset)

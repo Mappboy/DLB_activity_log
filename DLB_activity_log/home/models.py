@@ -71,11 +71,11 @@ class Dataset(models.Model):
     name = models.CharField(max_length=50)
     restricted = models.BooleanField(default=False)
     categories = models.CharField(max_length=20, choices=TYPE)
-    contact = models.ForeignKey(Client)
+    contact = models.ManyToManyField(Client)
     update_cycle = models.CharField(max_length=12, choices=UPDATES, default='Unknown')
-    dlb_project_id = models.ForeignKey(DLUId)
+    dlb_project_id = models.OneToOneField(DLUId)
     overview = models.TextField(default="This is a dataset overview")
-    created_by = models.ForeignKey(Linker)
+    created_by = models.ManyToManyField(Linker)
 
     def __str__(self):
         return "Dataset {}".format(self.name)
@@ -88,7 +88,7 @@ class Update(models.Model):
     dataset = models.ForeignKey(Dataset, default=5)
     date = models.DateField(default=date.today())
     reason = models.CharField(max_length=100, default='Recurring')
-    update_by = models.ForeignKey(Linker)
+    update_by = models.ManyToManyField(Linker)
 
 
 class Batch(models.Model):
@@ -117,9 +117,10 @@ class Batch(models.Model):
     format_changed = models.BooleanField(default=False)
     #Store hard or soft media
     media = models.CharField(max_length=20)
-    person_from = models.ForeignKey(Client)
+    person_from = models.ManyToManyField(Client)
     #Path on linkage side usually /raw_data/
-    filepath = models.FilePathField()
+    #filepath = models.FilePathField()
+    filepath = models.CharField(max_length=20)
     #Only necessary for adhoc
     date_to_destroy = models.DateField()
     # for now check if load profile is needed in future email dev create trac ticket
@@ -129,7 +130,7 @@ class Batch(models.Model):
     # Record number of records in and loaded
     recordsin = models.IntegerField()
     recordsloaded = models.IntegerField()
-    created_by = models.ForeignKey(Linker)
+    created_by = models.ManyToManyField(Linker)
     #Want a status field whether batch is open or closed
     status = models.CharField(max_length=12,choices=STATUS,default='U')
 
@@ -153,12 +154,12 @@ class Stage(models.Model):
              ('EX', 'Exporting'),
              ('LI', 'Linkage'),
              ('CO','Complete'))
-    batchid = models.ForeignKey('Batch')
+    batchid = models.ForeignKey(Batch)
     startdate = models.DateField()
     starttime = models.TimeField()
     enddate = models.DateField()
     endtime = models.TimeField()
-    controller = models.OneToOneField(Linker)
+    controller = models.ManyToManyField(Linker)
 
 
 class HardMedia(models.Model):

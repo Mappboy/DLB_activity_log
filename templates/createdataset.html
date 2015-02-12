@@ -10,21 +10,21 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 {% block title %}
-    Create New Dataset
+    <h1>Create New Dataset</h1>
 {% endblock %}
 
 {% block content %}
     <div>
-        <form action="" class="form-inline" method="post">
-          {% csrf_token %}
-          {% bootstrap_form form layout='horizontal'%}
-          {%  bootstrap_formset client_form layout='horizontal' %}
-          {%  bootstrap_formset dluid_form layout='horizontal' %}
-          {% buttons %}
-            <button type="submit" class="btn btn-primary">
-              {% bootstrap_icon "star" %} Submit
-            </button>
-          {% endbuttons %}
+        <form action="" class="form" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form layout='horizontal' %}
+            {% bootstrap_formset client_form layout='horizontal' %}
+            {% bootstrap_formset dluid_form layout='horizontal' %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} Submit
+                </button>
+            {% endbuttons %}
         </form>
     </div>
 {% endblock %}

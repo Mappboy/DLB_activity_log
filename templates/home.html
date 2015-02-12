@@ -1,24 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Dashboard Overview</h1>
-
-            <p>In the end this will be we keep an overview of new datasets,
-            reminders for upcoming data, data to be destroyed. May also include
-                some information about records in and loaded etc
-            </p>
-
-            <p><a class="btn btn-primary btn-lg">Datasets &raquo;</a></p>
-        </div>
-    </div>
-
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-lg-4">
+
+                <div class="col-lg-4">
+                    <h2>New Batches</h2>
+
+                    <p>This is for creating a new batch of data. Ensure Dataset is created firstly.
+                    Before going a head with batch creation.</p>
+
+                    <p><a class="btn btn-default" href="/create_batch/">View details &raquo;</a>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Statistics</h2>
+
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
+                        egestas eget quam. Vestibulum id ligula porta felis euismod
+                        semper. Fusce dapibus, tellus ac cursus commodo, tortor
+                        mauris
+                        condimentum nibh, ut fermentum massa justo sit amet
+                        risus.</p>
+
+                    <p><a class="btn btn-default" href="#">View details &raquo;</a>
+                    </p>
+                </div>
                 <h2>Upcoming</h2>
 
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce
@@ -27,32 +36,6 @@
                     fermentum massa justo sit amet risus. Etiam porta sem
                     malesuada
                     magna mollis euismod. Donec sed odio dui. </p>
-
-                <p><a class="btn btn-default" href="#">View details &raquo;</a>
-                </p>
-            </div>
-            <div class="col-lg-4">
-                <h2>New Datasets</h2>
-
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce
-                    dapibus,
-                    tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                    fermentum massa justo sit amet risus. Etiam porta sem
-                    malesuada
-                    magna mollis euismod. Donec sed odio dui. </p>
-
-                <p><a class="btn btn-default" href="#">View details &raquo;</a>
-                </p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Statistics</h2>
-
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-                    egestas eget quam. Vestibulum id ligula porta felis euismod
-                    semper. Fusce dapibus, tellus ac cursus commodo, tortor
-                    mauris
-                    condimentum nibh, ut fermentum massa justo sit amet
-                    risus.</p>
 
                 <p><a class="btn btn-default" href="#">View details &raquo;</a>
                 </p>
