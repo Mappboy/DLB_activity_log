@@ -1,5 +1,4 @@
 Django==1.7.1
-South==1.0.1
 coverage==3.7.1
 django-admin-tools==0.5.2
 django-bootstrap3==4.11.0
